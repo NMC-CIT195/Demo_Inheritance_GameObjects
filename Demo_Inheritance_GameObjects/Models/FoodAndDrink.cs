@@ -28,7 +28,7 @@ namespace Demo_Inheritance_GameObjects.Models
         public override string Use()
         {
             if (Consumable)
-                return $"You raise the {} to your mouth and finish it quickly.";
+                return $"You raise the {Name} to your mouth and finish it quickly.";
             else
                 return $"It appears that you are unable to consume the {Name} for some unknown reason.";
         }

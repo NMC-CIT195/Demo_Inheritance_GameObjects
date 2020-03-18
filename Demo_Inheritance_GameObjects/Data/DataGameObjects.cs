@@ -7,9 +7,9 @@ using Demo_Inheritance_GameObjects.Models;
 
 namespace Demo_Inheritance_GameObjects.Data
 {
-    static class DataGameObjects
+    public static class DataGameObjects
     {
-        static List<FoodAndDrink> IntializeFoodAndDrink()
+        public static List<FoodAndDrink> IntializeFoodAndDrink()
         {
             return new List<FoodAndDrink>()
             {
@@ -42,7 +42,7 @@ namespace Demo_Inheritance_GameObjects.Data
             };
         }
 
-        static List<Weapon> InitializeWeapons()
+        public static List<Weapon> InitializeWeapons()
         {
             return new List<Weapon>()
             {
@@ -54,8 +54,27 @@ namespace Demo_Inheritance_GameObjects.Data
                     WeaponTypeName = Weapon.WeaponType.DEFENSIVE,
                     Consumable = false,
                     HitPoints = 0
-                }
+                },
 
+                new Weapon()
+                {
+                    Id = 12,
+                    Name = "silver backed slug",
+                    Description = "Wrapped in damp parchment, the Bandorian tree slug covers you with a thick slime preventing any weapon for striking full force, head on.",
+                    WeaponTypeName = Weapon.WeaponType.DEFENSIVE,
+                    Consumable = true,
+                    HitPoints = 0
+                },
+
+                new Weapon()
+                {
+                    Id = 13,
+                    Name = "long sword",
+                    Description = "Large, Scottish, double edged blade with brass hilt.",
+                    WeaponTypeName = Weapon.WeaponType.MELEE,
+                    Consumable = false,
+                    HitPoints = 20
+                }
             };
         }
 

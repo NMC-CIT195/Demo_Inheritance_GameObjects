@@ -47,7 +47,7 @@ namespace Demo_Inheritance_GameObjects.Models
                     return $"You step back and unleash the {Name}.";
 
                 case WeaponType.DEFENSIVE:
-                    return $"Bringing up the {}, you defend yourself gallantly.";
+                    return $"Bringing up the {Name}, you defend yourself gallantly.";
                 default:
                     return "You are using a weapon of unknown type.";
             }
@@ -55,7 +55,7 @@ namespace Demo_Inheritance_GameObjects.Models
 
         public override string Message()
         {
-            return $"The {Name}: {Description}. It is a {WeaponTypeName.ToString().ToLower()} type of weapon. ");
+            return $"The {Name}: {Description}. It is a {WeaponTypeName.ToString().ToLower()} type of weapon. ";
         }
     }
 }
