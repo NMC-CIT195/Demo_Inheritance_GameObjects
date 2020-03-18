@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Demo_Inheritance_GameObjects
+namespace Demo_Inheritance_GameObjects.Models
 {
     public abstract class GameObject
     {
@@ -40,7 +40,7 @@ namespace Demo_Inheritance_GameObjects
             sb.Clear();
 
             sb.Append($"The {Name}: {Description} it is ");
-            sb.Append(Consumable ? "consumable" : "is not consumable");
+            sb.Append(Consumable ? "consumable" : "not consumable");
 
             return sb.ToString();
         }

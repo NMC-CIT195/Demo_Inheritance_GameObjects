@@ -43,10 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GameObject.cs" />
+    <Compile Include="Data\DataGameObjects.cs" />
+    <Compile Include="Models\FoodAndDrink.cs" />
+    <Compile Include="Models\GameObject.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Weapon.cs" />
+    <Compile Include="Models\Weapon.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

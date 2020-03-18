@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Demo_Inheritance_GameObjects
+namespace Demo_Inheritance_GameObjects.Models
 {
     public class Weapon : GameObject
     {
@@ -17,14 +17,14 @@ namespace Demo_Inheritance_GameObjects
         }
 
         public WeaponType WeaponTypeName { get; set; }
-
+        public int HitPoints { get; set; }
 
         public Weapon()
         {
 
         }
 
-        public Weapon(int id, string name, string description, bool consumable) :
+        public Weapon(int id, string name, string description, bool consumable, int hitPoints) :
             base(id, name, description, consumable)
         {
             Id = id;
@@ -51,6 +51,11 @@ namespace Demo_Inheritance_GameObjects
                 default:
                     return "You are using a weapon of unknown type.";
             }
+        }
+
+        public override string Message()
+        {
+            return $"The {Name}: {Description}. It is a {WeaponTypeName.ToString().ToLower()} type of weapon. ");
         }
     }
 }
