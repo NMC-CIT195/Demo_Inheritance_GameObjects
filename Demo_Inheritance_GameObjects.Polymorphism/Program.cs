@@ -25,31 +25,87 @@ namespace Demo_Inheritance_GameObjects
         {
             List<GameObject> gameObjects = DataGameObjects.IntializeGameObjects();
 
-            DisplayWeapons(gameObjects);
-            DisplayFoodAndDrink(gameObjects);
+            //
+            // use LINQ lambda to generate filtered lists
+            //
+            List<GameObject> gameObjectFoodAndDrinks = gameObjects.Where(go => go is FoodAndDrink).ToList();
+            List<GameObject> gameObjectWeapons = gameObjects.Where(go => go is Weapon).ToList();
 
-            UseWeapons(gameObjects);
-            UseFoodAndDrink(gameObjects);
+            DisplayGameObjects(gameObjectFoodAndDrinks);
+            DisplayGameObjects(gameObjectWeapons);
+
+            UseGameObject(gameObjectFoodAndDrinks);
+            UseGameObject(gameObjectWeapons);
         }
 
-        private static void UseFoodAndDrink(List<GameObject> gameObjects)
+        private static void UseGameObject(List<GameObject> gameObjects)
         {
-            //
-            // use LINQ lambda to filter list
-            //
-            List<GameObject> foodsAndDrinks = gameObjects.Where(go => go is FoodAndDrink).ToList();
+            string headerText = "";
+            string hitHealthText = "";
+            int hitHealthPoints = 0;
 
-            Console.Clear();
-            Console.WriteLine();
-            Console.WriteLine("\t\tUse Food and Drink");
-            Console.WriteLine();
-
-            foreach (FoodAndDrink foodAndDrink in foodsAndDrinks)
+            if (gameObjects != null)
             {
+                //
+                // set header and point type text
+                //
+                if (gameObjects[0] is Weapon)
+                {
+                    headerText = "Use Weapon";
+                    hitHealthText = "Hit points: ";
+                }
+                else if (gameObjects[0] is FoodAndDrink)
+                {
+                    headerText = "Use Food and Drink";
+                    hitHealthText = "Health points: ";
+                }
+                else
+                {
+                    headerText = "Unknown Game Object Type";
+                    hitHealthText = "Unknown point type: ";
+                }
+
+                //
+                // display header
+                //
+                Console.Clear();
                 Console.WriteLine();
-                Console.WriteLine("\t" + foodAndDrink.Message());
-                Console.WriteLine("\t" + foodAndDrink.Use());
-                Console.WriteLine("\t" + "Health points: " + foodAndDrink.HealthPoints);
+                Console.WriteLine("\t\t" + headerText);
+                Console.WriteLine();
+
+
+                foreach (GameObject gameObject in gameObjects)
+                {
+                    //
+                    // set hit and health points
+                    //
+                    if (gameObjects[0] is Weapon)
+                    {
+                        Weapon weaponGameObject = (Weapon)gameObject;
+                        hitHealthPoints = weaponGameObject.HitPoints;
+                    }
+                    else if (gameObjects[0] is FoodAndDrink)
+                    {
+                        FoodAndDrink foodAndDrinkGameObject = (FoodAndDrink)gameObject;
+                        hitHealthPoints = foodAndDrinkGameObject.HealthPoints;
+                    }
+                    else
+                    {
+                        hitHealthPoints = 0;
+                    }
+
+                    //
+                    // display game object use info
+                    //
+                    Console.WriteLine();
+                    Console.WriteLine("\t" + gameObject.Message());
+                    Console.WriteLine("\t" + gameObject.Use());
+                    Console.WriteLine("\t" + hitHealthText + hitHealthPoints);
+                }
+            }
+            else
+            {
+                Console.WriteLine("It appears there are no game objects to use.");
             }
 
             Console.WriteLine();
@@ -57,110 +113,95 @@ namespace Demo_Inheritance_GameObjects
             Console.ReadKey();
         }
 
-        private static void UseWeapons(List<GameObject> gameObjects)
+        private static void DisplayGameObjects(List<GameObject> gameObjects)
         {
-            //
-            // use LINQ lambda to filter list
-            //
-            List<GameObject> weapons = gameObjects.Where(go => go is Weapon).ToList();
+            string headerText = "";
+            string hitHealthText = "";
+            int hitHealthPoints = 0;
 
-            Console.Clear();
-            Console.WriteLine();
-            Console.WriteLine("\t\tUse Weapons");
-            Console.WriteLine();
-
-            foreach (Weapon weapon in weapons)
+            //
+            // set header and point type text
+            //
+            if (gameObjects != null)
             {
+                //
+                // set header and point type text
+                //
+                if (gameObjects[0] is Weapon)
+                {
+                    headerText = "Use Weapon";
+                    hitHealthText = "Hit Points";
+                }
+                else if (gameObjects[0] is FoodAndDrink)
+                {
+                    headerText = "Use Food and Drink";
+                    hitHealthText = "Health Points";
+                }
+                else
+                {
+                    headerText = "Unknown Game Object Type";
+                    hitHealthText = "Unknown";
+                }
+
+                //
+                // display header
+                //
+                Console.Clear();
                 Console.WriteLine();
-                Console.WriteLine("\t" + weapon.Message());
-                Console.WriteLine("\t" + weapon.Use());
-                Console.WriteLine("\t" + "Hit points: " + weapon.HitPoints);
-            }
+                Console.WriteLine("\t\t" + headerText);
+                Console.WriteLine();
 
-            Console.WriteLine();
-            Console.WriteLine("\t\tPress any key to continue.");
-            Console.ReadKey();
-        }
 
-        static void DisplayFoodAndDrink(List<GameObject> gameObjects)
-        {
-            //
-            // use LINQ lambda to filter list
-            //
-            List<GameObject> foodsAndDrinks = gameObjects.Where(go => go is FoodAndDrink).ToList();
-
-            Console.Clear();
-            Console.WriteLine();
-            Console.WriteLine("\t\tFood and Drink List");
-            Console.WriteLine();
-
-            Console.WriteLine(
-                "\t" +
-                "Id".PadLeft(5) +
-                "Name".PadLeft(25) +
-                "Consumable".PadLeft(15) +
-                "Health Points".PadLeft(15)
-                );
-            Console.WriteLine(
-                "\t" +
-                "----".PadLeft(5) +
-                "--------------".PadLeft(25) +
-                "--------------".PadLeft(15) +
-                "--------------".PadLeft(15)
-                );
-
-            foreach (FoodAndDrink foodAndDrink in foodsAndDrinks)
-            {
                 Console.WriteLine(
                     "\t" +
-                    foodAndDrink.Id.ToString().PadLeft(5) +
-                    foodAndDrink.Name.PadLeft(25) +
-                    (foodAndDrink.Consumable ? "Yes" : "No").PadLeft(15) +
-                    foodAndDrink.HealthPoints.ToString().PadLeft(15)
+                    "Id".PadLeft(5) +
+                    "Name".PadLeft(25) +
+                    "Consumable".PadLeft(15) +
+                    hitHealthText.PadLeft(15)
                     );
-            }
-
-            Console.WriteLine();
-            Console.WriteLine("\t\tPress any key to continue.");
-            Console.ReadKey();
-        }
-
-        static void DisplayWeapons(List<GameObject> gameObjects)
-        {
-            //
-            // use LINQ lambda to filter list
-            //
-            List<GameObject> weapons = gameObjects.Where(go => go is Weapon).ToList();
-
-            Console.Clear();
-            Console.WriteLine();
-            Console.WriteLine("\t\tWeapons List");
-            Console.WriteLine();
-
-            Console.WriteLine(
-                "\t" +
-                "Id".PadLeft(5) +
-                "Name".PadLeft(25) +
-                "Consumable".PadLeft(15) +
-                "Hit Points".PadLeft(15)
-                );
-            Console.WriteLine(
-                "\t" +
-                "----".PadLeft(5) +
-                "--------------".PadLeft(25) +
-                "--------------".PadLeft(15) +
-                "--------------".PadLeft(15)
-                );
-
-            foreach (Weapon weapon in weapons)
-            {
                 Console.WriteLine(
                     "\t" +
-                    weapon.Id.ToString().PadLeft(5) +
-                    weapon.Name.PadLeft(25) +
-                    (weapon.Consumable ? "Yes" : "No").PadLeft(15) +
-                    weapon.HitPoints.ToString().PadLeft(15)
+                    "----".PadLeft(5) +
+                    "--------------".PadLeft(25) +
+                    "--------------".PadLeft(15) +
+                    "--------------".PadLeft(15)
                     );
+
+                foreach (GameObject gameObject in gameObjects)
+                {
+                    //
+                    // set hit and health points
+                    //
+                    if (gameObjects[0] is Weapon)
+                    {
+                        Weapon weaponGameObject = (Weapon)gameObject;
+                        hitHealthPoints = weaponGameObject.HitPoints;
+                    }
+                    else if (gameObjects[0] is FoodAndDrink)
+                    {
+                        FoodAndDrink foodAndDrinkGameObject = (FoodAndDrink)gameObject;
+                        hitHealthPoints = foodAndDrinkGameObject.HealthPoints;
+                    }
+                    else
+                    {
+                        hitHealthPoints = 0;
+                    }
+
+                    //
+                    // display table info
+                    //
+                    Console.WriteLine(
+                        "\t" +
+                        gameObject.Id.ToString().PadLeft(5) +
+                        gameObject.Name.PadLeft(25) +
+                        (gameObject.Consumable ? "Yes" : "No").PadLeft(15) +
+                        hitHealthPoints.ToString().PadLeft(15)
+                        );
+                }
+            }
+            else
+            {
+                Console.WriteLine("It appears there are no game objects to display.");
             }
 
             Console.WriteLine();
