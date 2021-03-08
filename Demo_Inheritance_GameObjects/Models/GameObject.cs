@@ -27,12 +27,12 @@ namespace Demo_Inheritance_GameObjects.Models
         }
 
         //
-        // abstract methods 'must' be overriden in child class making it a requirement
+        // abstract methods 'must' be overridden in child class making it a requirement
         //
         public abstract string Use();
 
         //
-        // virtual methods 'may' be overriden in the child class making the parent method a default
+        // virtual methods 'may' be overridden in the child class making the parent method a default
         //
         public virtual string Message()
         {

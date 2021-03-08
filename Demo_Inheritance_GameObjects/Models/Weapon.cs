@@ -27,10 +27,7 @@ namespace Demo_Inheritance_GameObjects.Models
         public Weapon(int id, string name, string description, bool consumable, int hitPoints) :
             base(id, name, description, consumable)
         {
-            Id = id;
-            Name = name;
-            Description = description;
-            Consumable = consumable;
+
         }
 
         public override string Use()

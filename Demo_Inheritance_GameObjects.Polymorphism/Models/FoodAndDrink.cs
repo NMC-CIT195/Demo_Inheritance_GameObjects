@@ -18,10 +18,6 @@ namespace Demo_Inheritance_GameObjects.Models
         public FoodAndDrink(int id, string name, string description, bool consumable, int healthPoints) :
             base(id, name, description, consumable)
         {
-            Id = id;
-            Name = name;
-            Description = description;
-            Consumable = consumable;
             HealthPoints = healthPoints;
         }
 
